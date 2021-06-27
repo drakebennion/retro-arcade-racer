@@ -1,4 +1,4 @@
-use olc_rust_game_engine::{Color, ConsoleGameEngine, Painter, Result, Rules};
+use olc_rust_game_engine::{Color, ConsoleGameEngine, Utils, Result, Rules};
 
 struct RacerRules {
 
@@ -11,11 +11,11 @@ impl RacerRules {
 }
 
 impl Rules for RacerRules {
-    fn on_user_create(&mut self, painter: &mut Painter) {
+    fn on_user_create(&mut self, utils: &mut Utils) {
 
     }
 
-    fn on_user_update(&mut self, painter: &mut Painter, elapsed_time: f64) {
+    fn on_user_update(&mut self, utils: &mut Utils, elapsed_time: f64) {
 
     }
 }
