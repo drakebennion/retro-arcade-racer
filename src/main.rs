@@ -64,7 +64,7 @@ fn main() -> Result<()> {
     let rules = RacerRules::new();
     let mut game = ConsoleGameEngine::new(100, 160, rules);
     game.construct_console()?;
-    game.start()?;
+    game.start(true)?;
 
     Ok(())
 }
