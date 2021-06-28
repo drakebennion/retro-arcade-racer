@@ -127,9 +127,9 @@ dependencies = [
 
 [[package]]
 name = "olc_rust_game_engine"
-version = "0.2.0"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "953909cb5dee678f9fd7c31728db132481b92cb5ae47016471ad7f7bd201bc1b"
+checksum = "ade3ee661ed1fffbf29da57cda09417a08a040bf6fc1ead9bd95469ee676114c"
 dependencies = [
  "crossterm",
  "keyboard_query",
