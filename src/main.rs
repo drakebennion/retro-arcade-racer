@@ -59,12 +59,16 @@ impl Rules for RacerRules {
             self.speed -= 1.0 * elapsed_time;
         }
 
+        let mut car_direction = 0;
+
         if utils.keys.contains(&37) {
             self.player_curvature -= 0.7 * elapsed_time;
+            car_direction = -1;
         }
 
         if utils.keys.contains(&39) {
             self.player_curvature += 0.7 * elapsed_time;
+            car_direction = 1;
         }
 
         if (self.player_curvature - self.track_curvature).abs() >= 0.8 {
@@ -178,13 +182,35 @@ impl Rules for RacerRules {
             utils.width as f64 / 2.0 + ((utils.width as f64 * self.car_position) / 2.0) - 6.0;
         let car_y = (0.8 * utils.height as f64) as usize;
 
-        utils.draw_string(car_x as usize, car_y + 0, "   ||##||   ", Color::White, true);
-        //utils.draw_string(car_x as usize, car_y + 1, "      ##      ", Color::White, true);
-        utils.draw_string(car_x as usize, car_y + 1, "     ##     ", Color::White, true);
-        utils.draw_string(car_x as usize, car_y + 2, "     ##     ", Color::White, true);
-        utils.draw_string(car_x as usize, car_y + 3, "||| #### |||", Color::White, true);
-        utils.draw_string(car_x as usize, car_y + 4, "|||######|||", Color::White, true);
-        utils.draw_string(car_x as usize, car_y + 5, "||| #### |||", Color::White, true);
+        match car_direction {
+            1 => {
+                utils.draw_string(car_x as usize, car_y + 0, "      //####//", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 1, "         ##   ", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 2, "       ####   ", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 3, "      ####    ", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 4, "///  ####//// ", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 5, "//#######///O ", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 6, "/// #### //// ", Color::White, true);
+            },
+            -1 => {
+                utils.draw_string(car_x as usize, car_y + 0, "\\\\####\\\\      ", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 1, "   ##         ", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 2, "   ####       ", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 3, "    ####      ", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 4, " \\\\\\\\####  \\\\\\", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 5, " O\\\\\\#######\\\\", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 6, " \\\\\\\\ #### \\\\\\", Color::White, true);
+            },
+            _ => {
+                utils.draw_string(car_x as usize, car_y + 0, "   ||####||   ", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 1, "      ##      ", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 2, "     ####     ", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 3, "     ####     ", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 4, "|||  ####  |||", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 5, "|||########|||", Color::White, true);
+                utils.draw_string(car_x as usize, car_y + 6, "|||  ####  |||", Color::White, true);
+            }
+		}
     
         // draw stats
         utils.draw_string(0, 1, &format!("Distance {}", self.car_distance), Color::White, false);
@@ -199,7 +225,7 @@ impl Rules for RacerRules {
             let millis = (t - secs) * 1000.0;
 
             // todo: format this betterer
-            return format!("{}.{}.{}", mins as usize, secs, millis);
+            return format!("{}:{}:{}", mins as usize, secs, millis);
         };
 
         utils.draw_string(10, 8, &display_lap_time(&self.current_lap_time), Color::White, false);
