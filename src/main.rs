@@ -134,18 +134,17 @@ impl Rules for RacerRules {
 
         // draw car
         self.car_position = self.player_curvature - self.track_curvature;
-        let car_pos =
-            utils.width as f64 / 2.0 + ((utils.width as f64 * self.car_position) / 2.0) - 4.0;
-        // todo: make this car more car-y
+        let car_x =
+            utils.width as f64 / 2.0 + ((utils.width as f64 * self.car_position) / 2.0) - 7.0;
         let car_y = (0.8 * utils.height as f64) as usize;
-        utils.fill(
-            car_pos as usize,
-            car_y,
-            car_pos as usize + 4,
-            car_y + 4,
-            '#',
-            Color::Black,
-        );
+
+        utils.draw_string(car_x as usize, car_y + 0, "   ||####||   ", Color::White, true);
+        utils.draw_string(car_x as usize, car_y + 1, "      ##      ", Color::White, true);
+        utils.draw_string(car_x as usize, car_y + 2, "     ####     ", Color::White, true);
+        utils.draw_string(car_x as usize, car_y + 3, "     ####     ", Color::White, true);
+        utils.draw_string(car_x as usize, car_y + 4, "|||  ####  |||", Color::White, true);
+        utils.draw_string(car_x as usize, car_y + 5, "|||########|||", Color::White, true);
+        utils.draw_string(car_x as usize, car_y + 6, "|||  ####  |||", Color::White, true);
     }
 }
 
