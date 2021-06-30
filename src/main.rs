@@ -213,19 +213,19 @@ impl Rules for RacerRules {
 		}
     
         // draw stats
-        utils.draw_string(0, 1, &format!("Distance {}", self.car_distance), Color::White, false);
-        utils.draw_string(0, 2, &format!("Target Curvature {}", self.curvature), Color::White, false);
-        utils.draw_string(0, 3, &format!("Player Curvature {}", self.player_curvature), Color::White, false);
-        utils.draw_string(0, 4, &format!("Player Speed {}", self.speed), Color::White, false);
-        utils.draw_string(0, 5, &format!("Track Curvature {}", self.track_curvature), Color::White, false);
+        utils.draw_string(0, 1, &format!("Distance {:.2}", self.car_distance), Color::White, false);
+        utils.draw_string(0, 2, &format!("Target Curvature {:.2}", self.curvature), Color::White, false);
+        utils.draw_string(0, 3, &format!("Player Curvature {:.2}", self.player_curvature), Color::White, false);
+        utils.draw_string(0, 4, &format!("Player Speed {}", (self.speed * 70.0) as usize), Color::White, false);
+        utils.draw_string(0, 5, &format!("Track Curvature {:.2}", self.track_curvature), Color::White, false);
     
         let display_lap_time = |t: &f64| -> String {
-            let mins = t / 60.0;
-            let secs = t - (mins * 60.0);
-            let millis = (t - secs) * 1000.0;
+            let mins = (t / 60.0) as usize;
+            let secs = *t as usize - (mins * 60);
+            let millis = (t - secs as f64) * 10000.0;
 
             // todo: format this betterer
-            return format!("{}:{}:{}", mins as usize, secs, millis);
+            return format!("{:02}:{:02}:{:04}", mins, secs, millis as usize);
         };
 
         utils.draw_string(10, 8, &display_lap_time(&self.current_lap_time), Color::White, false);
